@@ -13,7 +13,7 @@ mkdir toolchain
 
 cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_LLD=ON \
               -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
-              -DRPI4_SYSROOT=/usr/aarch64-linux-gnu/ \
+              -DRPI4_SYSROOT=/mnt/sysroots/aarch64-linux-gnu-pi4 \
               -DLLVM_INSTALL_ROOT=./toolchain \
               -C./llvm-rpi4/llvm-rpi4.cmake \
               -S./llvm-project/llvm \
