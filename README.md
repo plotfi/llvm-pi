@@ -76,7 +76,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENAB
 
 ```
 ninja -C./llvm-project-build
-ninja -C./llvm-project-build install
+DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 ```
 
 We now have an llvm toolchain capable of building the llvm-test-suite for the Raspberry Pi 4.
