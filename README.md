@@ -80,3 +80,7 @@ ninja -C./llvm-project-build install
 ```
 
 We now have an llvm toolchain capable of building the llvm-test-suite for the Raspberry Pi 4.
+
+# Step 4 (Build the llvm-test-suite for Aarch64 Linux):
+
+
