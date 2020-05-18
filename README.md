@@ -46,4 +46,4 @@ cd
 * Once those packages are installed it will construct an aarch64 Linux sysroot at `/root/sysroots/aarch64-linux-gnu`
 
 
-## Step 3 (Build llvm-project including clang, lld, and Linux Aarch64 compiler-rt + libc++ runtimes)
+## Step 3 (Build llvm-project including clang, lld, and Aarch64 libc++ runtimes)
