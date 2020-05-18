@@ -94,7 +94,8 @@ git clone http://github.com/llvm/llvm-test-suite
 ```
 cd
 cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
-      -DRPI4_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
+      -DCMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
+      -DCMAKE_C_FLAGS="-save-temps" \
       -C./llvm-rpi4/llvm-test-suite-rpi4.cmake \
       -C./llvm-test-suite/cmake/caches/O3.cmake \
       ./llvm-test-suite
