@@ -1,6 +1,6 @@
 # Cross-build and deploy the llvm-test-suite for the RPI4.
 
-Often when making changes to LLVM's aarch64 backend, inorder to get a LGTM to land changes you must build and run llvm's test suite on device. This guide will show how to build clang, llvm, lld, and the aarch64-linux compiler-rt and libc++ runtimes inorder to do this. This guide will standardize on Ubuntu 20.04 LTS for both the cross-building docker environment as well as the device deployment environment (RPI4).
+Often when making changes to LLVM's AArch64 backend, inorder to get a LGTM to land changes you must build and run llvm's test suite on device. This guide will show how to build clang, llvm, lld, and the aarch64-linux compiler-rt and libc++ runtimes inorder to do this. This guide will standardize on Ubuntu 20.04 LTS for both the cross-building docker environment as well as the device deployment environment (RPI4).
 
 ## Step 1 (Create Docker Instance)
 
@@ -24,7 +24,7 @@ sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
   --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
 ```
 
-## Step 2 (Install Dev Packages and setup Linux aarch64 sysroot)
+## Step 2 (Install Dev Packages and setup Linux AArch64 sysroot)
 
 * Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker) and clone the llvm-rpi4 repo:
 
@@ -43,7 +43,7 @@ cd
 ```
 
 * The above installs a number of Ubuntu packages including cmake, clang, ninja, and various Gnu arm64 cross-build libraries.
-* Once those packages are installed it will construct an aarch64 Linux sysroot at `/root/sysroots/aarch64-linux-gnu`
+* Once those packages are installed it will construct an AArch64 Linux sysroot at `/root/sysroots/aarch64-linux-gnu`
 * You will also have build directories for `llvm-project-build`, `llvm-test-suite-build`, and `toolchain`.
 
 
