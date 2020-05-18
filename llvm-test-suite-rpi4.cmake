@@ -1,6 +1,4 @@
-# Make sure to set the RPI4_SYSROOT and LLVM_INSTALL_ROOT.
 set(CMAKE_SYSROOT ${RPI4_SYSROOT} CACHE STRING "")
-set(LLVM_ROOT ${LLVM_INSTALL_ROOT} CACHE STRING "")
 
 set(target_triple aarch64-unknown-linux-gnu)
 set(CMAKE_C_COMPILER_TARGET ${target_triple} CACHE STRING "")
