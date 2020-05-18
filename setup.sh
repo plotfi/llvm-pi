@@ -52,9 +52,4 @@ cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=/root/toolchain/ -DRPI4_SYSR
 
 ninja -C./llvm-project-build
 ninja -C./llvm-project/build install
-
-cd llvm-test-suite-build
-make -j16
-cd
-
-
+make -j16 -C./llvm-test-suite-build VERBOSE=1
