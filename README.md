@@ -26,4 +26,16 @@ sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
 
 ## Step 2 (Install Dev Packages and setup Linux aarch64 sysroot)
 
- GCC_VERS=10
+* Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker) and clone the llvm-rpi4 repo:
+
+```
+git clone https://github.com/plotfi/llvm-rpi4.git
+```
+
+* Now that we are inside our Docker instance of Ubuntu 20.04, we can install all of the devlopment packages and libaries needed to construct our sysroot and our cross compiler. To do this run the following:
+
+```
+# Sets the GCC Version. Latest currently on Ubuntu 20.04 is 10:
+export GCC_VERS=10
+ubuntu-docker-presetup.sh
+```
