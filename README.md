@@ -130,8 +130,29 @@ git -C ./llvm-project reset --hard origin/master
 
 * Now /root/toolchain-prime should be populated with a toolchain that has your changes.
 
-* Proceed to rebuild the llvm-test-suite with your new changes to the compiler, linker, and/or runtimes by doing the following:
+* Proceed to rebuild the llvm-test-suite with your new changes to the compiler, linker, and/or runtimes by doing the following (make sure you add any new flags required to the `CMAKE_C_FLAGS`, these flags are inherited by  the `CMAKE_CXX_FLAGS` as well):
 
 ```
+cd
+mkdir llvm-test-suite-build-prime
+cmake -B./llvm-test-suite-build-prime -DLLVM_INSTALL_ROOT=`pwd`/toolchain-prime/ \
+      -DCMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
+      -DCMAKE_C_FLAGS="-save-temps <additional_flags_for_your_changes>" \
+      -C./llvm-rpi4/llvm-test-suite-rpi4.cmake \
+      -C./llvm-test-suite/cmake/caches/O3.cmake \
+      ./llvm-test-suite
+
+make -j16 -C./llvm-test-suite-build-prime VERBOSE=1
+```
+
+# Step 6 (Lift the newly build llvm-test-suites off of the Docker instance for further analysis and device testing):
+
+* Now that we are done building the llvm-test-suite both with an without our changes (llvm-test-suite-build and llvm-test-suite-build-prime artifacts), we can now rsync the artifacts off of the Docker container to our shared directory that we passed into the container earlier:
 
 ```
+rsync -av llvm-test-suite-build  /mnt/share
+rsync -av llvm-test-suite-build-prime  /mnt/share
+```
+* Now the test suite builds are in the `share` directory on your host systems home directory (ie probably ``/home/username/share` or `/Users/username/share` or `c:/Users/username/share`.
+
+* These llvm-test-suite builds can now be used for device runs or just simple examination for code size or instruction count changes. 
