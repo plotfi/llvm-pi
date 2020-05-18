@@ -44,3 +44,6 @@ cd
 
 * The above installs a number of Ubuntu packages including cmake, clang, ninja, and various Gnu arm64 cross-build libraries.
 * Once those packages are installed it will construct an aarch64 Linux sysroot at `/root/sysroots/aarch64-linux-gnu`
+
+
+## Step 3 (Build llvm-project including clang, lld, and Linux Aarch64 compiler-rt + libc++ runtimes)
