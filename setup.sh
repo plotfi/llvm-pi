@@ -10,13 +10,13 @@ apt install cmake ninja-build clang clang-format lldb lld gcc g++ vim cargo htop
             libgcc1-arm64-cross libgcc-$GCC_VERS-dev-arm64-cross
 
 cd
-mkdir -p sysroot/aarch64-linux-gnu/usr
+mkdir -p sysroots/aarch64-linux-gnu/usr
 mkdir llvm-project-build
 mkdir llvm-test-suite-build
 mkdir toolchain
 
 pushd .
-cd sysroot/aarch64-linux-gnu/usr
+cd sysroots/aarch64-linux-gnu/usr
 cp -r -v -L /usr/aarch64-linux-gnu/include /usr/aarch64-linux-gnu/lib .
 
 cd lib
