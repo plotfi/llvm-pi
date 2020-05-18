@@ -35,3 +35,4 @@ rm -rf usr/share libcrypt-dev*arm64.deb DEBIAN
 rsync -av usr ../
 cd ..
 rm -rf tmp
+popd
