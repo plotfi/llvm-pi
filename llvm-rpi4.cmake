@@ -1,4 +1,4 @@
-set(RPI4_CMAKE_SYSROOT "/root/sysroots/aarch64-linux-gnu" CACHE STRING "")
+# set(RPI4_CMAKE_SYSROOT "/root/sysroots/aarch64-linux-gnu" CACHE STRING "")
 
 set(LLVM_INSTALL_BINUTILS_SYMLINKS ON CACHE BOOL "")
 set(LLVM_INSTALL_CCTOOLS_SYMLINKS ON CACHE BOOL "")
