@@ -23,3 +23,7 @@ docker pull ubuntu
 sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
   --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
 ```
+
+## Step 2 (Install Ubuntu Packages for Clang, cross-build libaries, etc. Also setup the Linux aarch64 sysroot)
+
+ GCC_VERS=10
