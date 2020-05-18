@@ -50,7 +50,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENAB
               -B./llvm-project-build
               
 ninja -C./llvm-project-build
-ninja -C./llvm-project/build install
+ninja -C./llvm-project-build install
 
 
 cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ -DRPI4_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
