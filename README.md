@@ -41,3 +41,4 @@ export GCC_VERS=10
 cd
 ./llvm-rpi4/ubuntu-docker-presetup.sh
 ```
+* The above installs a number of Ubuntu packages including cmake, clang, ninja, and various Gnu arm64 cross-build libraries. Once those packages are installed it will construct a aarch64-linux-gnu sysroot at /root/sysroots/aarch64-linux-gnu.
