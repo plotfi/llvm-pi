@@ -46,10 +46,12 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENAB
               -C./llvm-rpi4/llvm-rpi4.cmake \
               -S./llvm-project/llvm \
               -B./llvm-project-build
+              
+ninja -C./llvm-project-build
+ninja -C./llvm-project/build install
+
 
 cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=/root/toolchain/ -DRPI4_SYSROOT=/root/sysroots/aarch64-linux-gnu \
       -C./llvm-rpi4/llvm-test-suite-rpi4.cmake -C./llvm-test-suite/cmake/caches/O3.cmake ./llvm-test-suite
 
-ninja -C./llvm-project-build
-ninja -C./llvm-project/build install
 make -j16 -C./llvm-test-suite-build VERBOSE=1
