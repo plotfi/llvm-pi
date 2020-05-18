@@ -3,7 +3,7 @@
 Often when making changes to LLVM's AArch64 backend, inorder to get a LGTM to land changes you must build and run llvm's test suite on device. This guide will show how to build clang, llvm, lld, and the aarch64-linux compiler-rt and libc++ runtimes inorder to do this. This guide will standardize on Ubuntu 20.04 LTS for both the cross-building docker environment as well as the device deployment environment (RPI4).
 
 
-The following step by step guide will show how to cross-build the llvm-test-suite for the Raspberry Pi 4. For step on how to setup the Raspberry Pi 4 itself for on-device runs of the llvm-test-suite, please seem README-RPI4.md.
+The following step by step guide will show how to cross-build the llvm-test-suite for the Raspberry Pi 4. For step on how to setup the Raspberry Pi 4 itself for on-device runs of the llvm-test-suite, please seem  [README-RPI4.md](README-RPI4.md).
 
 ## Step 1 (Create Docker Instance)
 
