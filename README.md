@@ -4,16 +4,18 @@ Often when making changes to LLVM's aarch64 backend, inorder to get a LGTM to la
 
 ## Step 1
 
-First things first, install Docker: https://www.docker.com/
-Next, create a directory to share between your host system and the docker image:
+* First things first, install Docker: https://www.docker.com/
+* Next, create a directory to share between your host system and the docker image:
 
 ```
 cd /to/home/directory
 mkdir share
 ```
 
-Next, pull ubuntu docker repo:
+Next, pull the ubuntu docker repo:
 
 ```
 docker pull ubuntu
 ```
+
+
