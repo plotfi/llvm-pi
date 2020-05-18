@@ -12,6 +12,7 @@ mkdir llvm-project-build
 mkdir llvm-test-suite-build
 mkdir toolchain
 
+pushd
 cd sysroot/aarch64-linux-gnu/usr
 cp -r -v -L /usr/aarch64-linux-gnu/include /usr/aarch64-linux-gnu/lib .
 
@@ -33,6 +34,7 @@ rsync -av usr ../
 cd ..
 rm -rf tmp
 
+popd
 git clone https://github.com/plotfi/llvm-rpi4.git
 git clone http://github.com/llvm/llvm-project
 git clone http://github.com/llvm/llvm-test-suite
