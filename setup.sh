@@ -15,7 +15,7 @@ mkdir llvm-project-build
 mkdir llvm-test-suite-build
 mkdir toolchain
 
-pushd
+pushd .
 cd sysroot/aarch64-linux-gnu/usr
 cp -r -v -L /usr/aarch64-linux-gnu/include /usr/aarch64-linux-gnu/lib .
 
