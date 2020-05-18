@@ -30,6 +30,8 @@ curl $LIBCRYPT_URL 2>&1 | grep -oh "\"libcrypt-dev.*arm64.deb\"" | sort -nr | he
 dpkg-deb -R libcrypt-dev*arm64.deb .
 rm -rf usr/share libcrypt-dev*arm64.deb DEBIAN
 rsync -av usr ../
+cd ..
+rm -rf tmp
 
 git clone https://github.com/plotfi/llvm-rpi4.git
 git clone http://github.com/llvm/llvm-project
