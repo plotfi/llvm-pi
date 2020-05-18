@@ -1,6 +1,4 @@
-# Make sure to set the RPI4_SYSROOT and LLVM_ROOT.
-set(RPI4_CMAKE_SYSROOT ${RPI4_SYSROOT} CACHE STRING "")
-set(CMAKE_INSTALL_PREFIX ${LLVM_ROOT} CACHE STRING "")
+set(RPI4_CMAKE_SYSROOT "/root/sysroots/aarch64-linux-gnu" CACHE STRING "")
 
 set(LLVM_INSTALL_BINUTILS_SYMLINKS ON CACHE BOOL "")
 set(LLVM_INSTALL_CCTOOLS_SYMLINKS ON CACHE BOOL "")
@@ -9,7 +7,6 @@ set(CLANG_DEFAULT_OBJCOPY "llvm-objcopy" CACHE STRING "")
 
 set(RUNTIMES runtimes)
 set(LLVM_ENABLE_RUNTIMES compiler-rt libcxx libcxxabi libunwind CACHE STRING "")
-set(LLVM_ENABLE_PROJECTS all CACHE STRING "")
 set(LLD_TOOLS lld CACHE STRING "")
 set(CLANG_LIBS libclang libclang-headers libclang-python-bindings
     CACHE STRING "")
@@ -104,3 +101,5 @@ set(LLVM_DISTRIBUTION_COMPONENTS
       ${LLD_TOOLS}
       ${RUNTIMES}
     CACHE STRING "")
+
+set(LLVM_ENABLE_PROJECTS clang clang-tools-extra lld CACHE STRING "")
