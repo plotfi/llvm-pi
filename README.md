@@ -83,4 +83,22 @@ We now have an llvm toolchain capable of building the llvm-test-suite for the Ra
 
 # Step 4 (Build the llvm-test-suite for Aarch64 Linux):
 
+* First, clone the llvm-test-suite:
 
+```
+git clone http://github.com/llvm/llvm-test-suite
+```
+
+* Next, built the llvm-test-suite using the `llvm-rpi4/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux Aarch64 sysroot:
+
+```
+cd
+cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ -DRPI4_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
+      -C./llvm-rpi4/llvm-test-suite-rpi4.cmake -C./llvm-test-suite/cmake/caches/O3.cmake ./llvm-test-suite
+```
+
+* Finally, build the llvm-test-suite:
+
+```
+make -j16 -C./llvm-test-suite-build VERBOSE=1
+```
