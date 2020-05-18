@@ -47,7 +47,7 @@ cd
 * You will also have build directories for `llvm-project-build`, `llvm-test-suite-build`, and `toolchain`.
 
 
-## Step 3 (Build llvm-project including clang, lld, and Aarch64 libc++ runtimes)
+## Step 3 (Build llvm-project including clang, lld, and AArch64 libc++ runtimes)
 
 * Now that we have our minimal sysroot we can build llvm-project. This is the same llvm-project you will be applying any of your patches to to determine any instruction count, instruction type, code size, size, and runtime deltas. We are building llvm, clang, lld, compiler-rt, compiler-rt runtimes for aarch64, libc++ runtimes for aarch64 and all the rest because we want to use LLVM's facilities as much as possible for testing and because we want as little dependence to our potentially haphazzardly constructed Gnu sysroot.
 * To start first clone llvm-project:
@@ -57,7 +57,7 @@ cd
 git clone http://github.com/llvm/llvm-project
 ```
 
-* Now invoke cmake using the `llvm-rpi4/llvm-rpi4.cmake` cache file, don't forget to pass in the `RPI4_CMAKE_SYSROOT` for the Aarch64 Linux sysroot that was constructed earlier:
+* Now invoke cmake using the `llvm-rpi4/llvm-rpi4.cmake` cache file, don't forget to pass in the `RPI4_CMAKE_SYSROOT` for the AArch64 Linux sysroot that was constructed earlier:
 
 ```
 cd
@@ -81,7 +81,7 @@ DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 
 We now have an llvm toolchain capable of building the llvm-test-suite for the Raspberry Pi 4.
 
-# Step 4 (Build the llvm-test-suite for Aarch64 Linux):
+# Step 4 (Build the llvm-test-suite for AArch64 Linux):
 
 * First, clone the llvm-test-suite:
 
@@ -89,7 +89,7 @@ We now have an llvm toolchain capable of building the llvm-test-suite for the Ra
 git clone http://github.com/llvm/llvm-test-suite
 ```
 
-* Next, built the llvm-test-suite using the `llvm-rpi4/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux Aarch64 sysroot:
+* Next, built the llvm-test-suite using the `llvm-rpi4/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux AArch64 sysroot:
 
 ```
 cd
