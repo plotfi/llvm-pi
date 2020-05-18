@@ -8,14 +8,18 @@ Often when making changes to LLVM's aarch64 backend, inorder to get a LGTM to la
 * Next, create a directory to share between your host system and the docker image:
 
 ```
-cd /to/home/directory
+cd /path/to/home/directory
 mkdir share
 ```
 
-Next, pull the ubuntu docker repo:
+* Pull the ubuntu docker repo:
 
 ```
 docker pull ubuntu
 ```
 
-
+* Finally, create your Ubuntu 20.04 LTS Docker instance while mapping your newly created 'share' directory to  '/mnt/share'
+```
+sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
+  --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
+```
