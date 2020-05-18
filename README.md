@@ -106,3 +106,32 @@ cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
 ```
 make -j16 -C./llvm-test-suite-build VERBOSE=1
 ```
+# Step 5 (Apply your new Clang/llvm/llvm-project/compiler-rt changes, rebuild llvm-project, rebuild llvm-test-suite):
+
+* Now we want to apply and build our changes to the llvm-project tree and use that to rebuild the llvm-test-suite.
+* Before we start, the easiest way to proceed is to grab your diff from a review you've already posted to phabricator or from a link you've generated from a paste website like seashells.io.
+* To do this, lets assume you've already put your diff into a patch called `mypatch.diff`. We can post this diff to seashells.io by doing the following:
+
+```
+$ cat mypatch.diff | nc seashells.io 1337
+serving at https://seashells.io/v/PNHBFVpj
+```
+
+* Now the URL https://seashells.io/v/PNHBFVpj will have the context if the diff. Switching the /v/ to /p/ in the URL will produce a raw text output.
+* To apply and build llvm-project with your patch simply do the following:
+
+```
+cd
+curl https://seashells.io/p/some_hash | patch -d./llvm-project -p1
+DESTDIR=`pwd`/toolchain-prime  ninja -C./llvm-project-build install
+git -C ./llvm-project clean -fdx 
+git -C ./llvm-project reset --hard origin/master 
+```
+
+* Now /root/toolchain-prime should be populated with a toolchain that has your changes.
+
+* Proceed to rebuild the llvm-test-suite with your new changes to the compiler, linker, and/or runtimes by doing the following:
+
+```
+
+```
