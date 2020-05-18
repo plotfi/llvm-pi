@@ -3,7 +3,7 @@
 Often when making changes to LLVM's AArch64 backend, inorder to get a LGTM to land changes you must build and run llvm's test suite on device. This guide will show how to build clang, llvm, lld, and the aarch64-linux compiler-rt and libc++ runtimes inorder to do this. This guide will standardize on Ubuntu 20.04 LTS for both the cross-building docker environment as well as the device deployment environment (RPI4).
 
 
-The following step by step guide will show how to cross-build the llvm-test-suite for the Raspberry Pi 4. For step on how to setup the Raspberry Pi 4 itself for on-device runs of the llvm-test-suite, please seem  [README-RPI4.md](README-RPI4.md).
+The following step by step guide will show how to cross-build the llvm-test-suite for the Raspberry Pi 4. For step on how to setup the Raspberry Pi 4 itself for on-device runs of the llvm-test-suite, please seem [README-RPI4.md](README-RPI4.md).
 
 ## Step 1 (Create Docker Instance)
 
@@ -158,4 +158,7 @@ rsync -av llvm-test-suite-build-prime  /mnt/share
 ```
 * Now the test suite builds are in the `share` directory on your host systems home directory (ie probably ``/home/username/share` or `/Users/username/share` or `c:/Users/username/share`.
 
-* These llvm-test-suite builds can now be used for device runs or just simple examination for code size or instruction count changes. 
+# Step 7 (You're done):
+
+* These llvm-test-suite builds can now be used for device runs or just simple examination for code size or instruction count changes.
+* Check out [README-RPI4.md](README-RPI4.md) to see how to setup a Raspberry Pi 4 to actually run the llvm-test-suite builds you have lifted off of your Docker instance. 
