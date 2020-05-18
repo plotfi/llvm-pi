@@ -1,4 +1,9 @@
-#!/bin/bash
+
+# We start off creating our docker image with a share directory so we can rsync the test-suite build files.
+cd
+mkdir share
+sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
+  --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
 
 GCC_VERS=10
 
@@ -56,3 +61,4 @@ cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ -DRPI4_SYSR
       -C./llvm-rpi4/llvm-test-suite-rpi4.cmake -C./llvm-test-suite/cmake/caches/O3.cmake ./llvm-test-suite
 
 make -j16 -C./llvm-test-suite-build VERBOSE=1
+rsync -av llvm-test-suite-build  /mnt/share
