@@ -92,6 +92,7 @@ We now have an llvm toolchain capable of building the llvm-test-suite for the Ra
 * First, clone the llvm-test-suite:
 
 ```
+cd
 git clone http://github.com/llvm/llvm-test-suite
 ```
 
@@ -110,6 +111,7 @@ cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
 * Finally, build the llvm-test-suite:
 
 ```
+cd
 make -j16 -C./llvm-test-suite-build VERBOSE=1
 ```
 # Step 5 (Apply your new Clang/llvm/llvm-project/compiler-rt changes, rebuild llvm-project, rebuild llvm-test-suite):
