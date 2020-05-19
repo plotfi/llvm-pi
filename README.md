@@ -29,7 +29,7 @@ sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
 
 ## Step 2 (Install Dev Packages and setup Linux AArch64 sysroot)
 
-* Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker) and clone the llvm-rpi4 repo:
+* Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker). Install git and clone the llvm-rpi4 repo:
 
 ```
 cd
