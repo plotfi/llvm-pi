@@ -44,7 +44,7 @@ git clone https://github.com/plotfi/llvm-rpi4.git
 # Sets the GCC Version. Latest currently on Ubuntu 20.04 is 10:
 export GCC_VERS=10
 cd
-./llvm-rpi4/ubuntu-docker-presetup.sh
+bash -x ./llvm-rpi4/ubuntu-docker-presetup.sh
 ```
 
 * The above installs a number of Ubuntu packages including cmake, clang, ninja, and various Gnu arm64 cross-build libraries.
