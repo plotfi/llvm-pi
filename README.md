@@ -33,7 +33,7 @@ sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
 
 ```
 apt update
-apt install git
+apt install git -y
 cd
 git clone https://github.com/plotfi/llvm-rpi4.git
 ```
