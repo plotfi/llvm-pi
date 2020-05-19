@@ -32,8 +32,9 @@ sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
 * Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker). Update apt, install git, and clone the llvm-rpi4 repo:
 
 ```
-cd
+apt update
 apt install git
+cd
 git clone https://github.com/plotfi/llvm-rpi4.git
 ```
 
