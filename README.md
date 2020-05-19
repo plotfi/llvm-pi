@@ -80,6 +80,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENAB
 * Now build llvm-project with ninja and install it to /root/toolchain:
 
 ```
+cd
 ninja -C./llvm-project-build
 DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 ```
