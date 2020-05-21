@@ -44,6 +44,8 @@ RUN apt-get update \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && cd \
+    && git clone https://github.com/plotfi/llvm-rpi4.git
 ENV DEBIAN_FRONTEND=dialog
 
