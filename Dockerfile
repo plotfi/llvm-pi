@@ -46,6 +46,6 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && cd \
-    && git clone https://github.com/plotfi/llvm-rpi4.git
+    && git clone http://github.com/plotfi/llvm-rpi4.git
 ENV DEBIAN_FRONTEND=dialog
 
