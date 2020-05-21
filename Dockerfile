@@ -39,7 +39,7 @@ RUN apt-get update \
     && rm -rf usr/share libcrypt-dev*arm64.deb DEBIAN \
     && rsync -av usr ../ \
     && cd .. \
-    && rm -rf tmp
+    && rm -rf tmp \
     #
     # Clean up
     && apt-get autoremove -y \
