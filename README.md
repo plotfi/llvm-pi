@@ -16,7 +16,7 @@ Alternatively you can do the docker setup manually from a stock ubuntu focal ima
 To use the docker repo first install docker from https://www.docker.com/, and follow these steps:
 
 ```
-docker pull plotfi/llvm-pi
+sudo docker pull plotfi/llvm-pi
 sudo docker run --privileged --interactive --tty --name llvm-pi \
                 --mount type=bind,source=`pwd`/share,target=/mnt/share  plotfi/llvm-pi:latest /bin/bash
 ```
