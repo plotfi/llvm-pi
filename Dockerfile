@@ -58,6 +58,9 @@ RUN apt-get update \
     && ln -s ~/dotfiles/vim/init.vim ~/.vimrc \
     && mkdir ~/Tools \
     && ln -s ~/toolchain ~/Tools/clang+llvm \
+    && cd ~/.vim/plugins/ \
+    && source  install-lsp.sh \
+    && cd \
     && git clone http://github.com/plotfi/llvm-pi.git \
     && git clone http://github.com/llvm/llvm-project \
     && git clone http://github.com/llvm/llvm-test-suite
