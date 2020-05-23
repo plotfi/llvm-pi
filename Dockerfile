@@ -48,6 +48,7 @@ RUN apt-get update \
     && export GIT_SSL_NO_VERIFY=1 \
     && cd \
     && git clone http://github.com/plotfi/llvm-pi.git \
-    && ln -s llvm-rpi4 llvm-pi
+    && git clone http://github.com/llvm/llvm-project \
+    && git clone http://github.com/llvm/llvm-test-suite
 ENV DEBIAN_FRONTEND=dialog
 
