@@ -47,13 +47,13 @@ sudo docker run --privileged --interactive --tty --name llvm-pi \
 
 ## Step 2 (Install Dev Packages and setup Linux AArch64 sysroot)
 
-* Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker). Update apt, install git, and clone the llvm-rpi4 repo:
+* Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker). Update apt, install git, and clone the llvm-pi repo:
 
 ```
 apt update
 apt install git -y
 cd
-git clone https://github.com/plotfi/llvm-rpi4.git
+git clone https://github.com/plotfi/llvm-pi.git
 ```
 
 * Now that we are inside our Docker instance of Ubuntu 20.04, we can install all of the devlopment packages and libaries needed to construct our sysroot and our cross compiler. To do this run the following:
@@ -62,7 +62,7 @@ git clone https://github.com/plotfi/llvm-rpi4.git
 # Sets the GCC Version. Latest currently on Ubuntu 20.04 is 10:
 export GCC_VERS=10
 cd
-bash -x ./llvm-rpi4/ubuntu-docker-presetup.sh
+bash -x ./llvm-pi/ubuntu-docker-presetup.sh
 ```
 
 * The above installs a number of Ubuntu packages including cmake, clang, ninja, and various Gnu arm64 cross-build libraries.
@@ -80,7 +80,7 @@ cd
 git clone http://github.com/llvm/llvm-project
 ```
 
-* Now invoke cmake using the `llvm-rpi4/llvm-rpi4.cmake` cache file, don't forget to pass in the `RPI4_CMAKE_SYSROOT` for the AArch64 Linux sysroot that was constructed earlier:
+* Now invoke cmake using the `llvm-pi/llvm-rpi4.cmake` cache file, don't forget to pass in the `RPI4_CMAKE_SYSROOT` for the AArch64 Linux sysroot that was constructed earlier:
 
 ```
 cd
@@ -89,7 +89,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENAB
               -DCMAKE_ASM_COMPILER=clang \
               -DCMAKE_INSTALL_PREFIX=/ \
               -DRPI4_CMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
-              -C./llvm-rpi4/llvm-rpi4.cmake \
+              -C./llvm-pi/llvm-rpi4.cmake \
               -S./llvm-project/llvm \
               -B./llvm-project-build
 ```
@@ -114,14 +114,14 @@ cd
 git clone http://github.com/llvm/llvm-test-suite
 ```
 
-* Next, built the llvm-test-suite using the `llvm-rpi4/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux AArch64 sysroot:
+* Next, built the llvm-test-suite using the `llvm-pi/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux AArch64 sysroot:
 
 ```
 cd
 cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
       -DCMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
       -DCMAKE_C_FLAGS="-save-temps" \
-      -C./llvm-rpi4/llvm-test-suite-rpi4.cmake \
+      -C./llvm-pi/llvm-test-suite-rpi4.cmake \
       -C./llvm-test-suite/cmake/caches/O3.cmake \
       ./llvm-test-suite
 ```
@@ -164,7 +164,7 @@ mkdir llvm-test-suite-build-prime
 cmake -B./llvm-test-suite-build-prime -DLLVM_INSTALL_ROOT=`pwd`/toolchain-prime/ \
       -DCMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
       -DCMAKE_C_FLAGS="-save-temps <additional_flags_for_your_changes>" \
-      -C./llvm-rpi4/llvm-test-suite-rpi4.cmake \
+      -C./llvm-pi/llvm-test-suite-rpi4.cmake \
       -C./llvm-test-suite/cmake/caches/O3.cmake \
       ./llvm-test-suite
 
