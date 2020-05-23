@@ -69,21 +69,32 @@ bash -x ./llvm-pi/ubuntu-docker-presetup.sh
 * Once those packages are installed it will construct an AArch64 Linux sysroot at `/root/sysroots/aarch64-linux-gnu`
 * You will also have build directories for `llvm-project-build`, `llvm-test-suite-build`, and `toolchain`.
 
+## Step 2a (Clone llvm-project and llvm-test-suite)
 
-## Step 3 (Build llvm-project including clang, lld, and AArch64 libc++ runtimes)
-
-* Now that we have our minimal sysroot we can build llvm-project. This is the same llvm-project you will be applying any of your patches to to determine any instruction count, instruction type, code size, size, and runtime deltas. We are building llvm, clang, lld, compiler-rt, compiler-rt runtimes for aarch64, libc++ runtimes for aarch64 and all the rest because we want to use LLVM's facilities as much as possible for testing and because we want as little dependence to our potentially haphazzardly constructed Gnu sysroot.
-* To start first clone llvm-project:
+* Clone llvm-project:
 
 ```
 cd
 git clone http://github.com/llvm/llvm-project
 ```
 
+* Then, clone the llvm-test-suite:
+
+```
+cd
+git clone http://github.com/llvm/llvm-test-suite
+```
+
+## Step 3 (Build llvm-project including clang, lld, and AArch64 libc++ runtimes)
+
+* Now that we have our minimal sysroot and have cloned our llvm repos we can build llvm-project. This is the same llvm-project you will be applying any of your patches to to determine any instruction count, instruction type, code size, size, and runtime deltas. We are building llvm, clang, lld, compiler-rt, compiler-rt runtimes for aarch64, libc++ runtimes for aarch64 and all the rest because we want to use LLVM's facilities as much as possible for testing and because we want as little dependence to our potentially haphazzardly constructed Gnu sysroot.
+
 * Now invoke cmake using the `llvm-pi/llvm-rpi4.cmake` cache file, don't forget to pass in the `RPI4_CMAKE_SYSROOT` for the AArch64 Linux sysroot that was constructed earlier:
 
 ```
 cd
+git -C ./llvm-project fetch --all
+git -C ./llvm-project reset --hard origin/master
 cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_LLD=ON \
               -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
               -DCMAKE_ASM_COMPILER=clang \
@@ -103,21 +114,17 @@ ninja -C./llvm-project-build
 DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 ```
 
-We now have an llvm toolchain capable of building the llvm-test-suite for the Raspberry Pi 4.
+We now have an llvm toolchain capable of building the llvm-test-suite for the AArch64 Linux.
 
 # Step 4 (Build the llvm-test-suite for AArch64 Linux)
 
-* First, clone the llvm-test-suite:
+
+* We've already cloned the llvm-test-suite, so now we build the llvm-test-suite using the `llvm-pi/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux AArch64 sysroot:
 
 ```
 cd
-git clone http://github.com/llvm/llvm-test-suite
-```
-
-* Next, built the llvm-test-suite using the `llvm-pi/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux AArch64 sysroot:
-
-```
-cd
+git -C ./llvm-test-suite fetch --all
+git -C ./llvm-test-suite reset --hard origin/master
 cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
       -DCMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
       -DCMAKE_C_FLAGS="-save-temps" \
