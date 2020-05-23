@@ -5,6 +5,24 @@ Often when making changes to LLVM's AArch64 backend, inorder to get a LGTM to la
 
 The following step by step guide will show how to cross-build the llvm-test-suite for the Raspberry Pi 4. For step on how to setup the Raspberry Pi 4 itself for on-device runs of the llvm-test-suite, please seem [README-RPI4.md](README-RPI4.md).
 
+## Pre Step
+
+This repo is synced with the docker repo at https://hub.docker.com/r/plotfi/llvm-pi.
+
+You can either use the docker repo, in which case you can skip to step 3.
+
+Alternatively you can do the docker setup manually from a stock ubuntu focal image, or you can still alternatively ignore all the docker stuff and just follow the guide on a normal Ubuntu system.
+
+To use the docker repo first install docker from https://www.docker.com/, and follow these steps:
+
+```
+docker pull plotfi/llvm-pi
+sudo docker run --privileged --interactive --tty --name llvm-pi \
+                --mount type=bind,source=`pwd`/share,target=/mnt/share  plotfi/llvm-pi:latest /bin/bash
+```
+
+Now skip to step 3.
+
 ## Step 1 (Create Docker Instance)
 
 * First things first, install Docker: https://www.docker.com/
@@ -23,7 +41,7 @@ docker pull ubuntu
 
 * Finally, create your Ubuntu 20.04 LTS Docker instance while mapping your newly created 'share' directory to  '/mnt/share'
 ```
-sudo docker run --privileged --interactive --tty --name ubuntu-llvm-test \
+sudo docker run --privileged --interactive --tty --name llvm-pi \
   --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
 ```
 
@@ -87,7 +105,7 @@ DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 
 We now have an llvm toolchain capable of building the llvm-test-suite for the Raspberry Pi 4.
 
-# Step 4 (Build the llvm-test-suite for AArch64 Linux):
+# Step 4 (Build the llvm-test-suite for AArch64 Linux)
 
 * First, clone the llvm-test-suite:
 
@@ -114,7 +132,7 @@ cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
 cd
 make -j16 -C./llvm-test-suite-build VERBOSE=1
 ```
-# Step 5 (Apply your new Clang/llvm/llvm-project/compiler-rt changes, rebuild llvm-project, rebuild llvm-test-suite):
+# Step 5 (Apply your new Clang/llvm/llvm-project/compiler-rt changes, rebuild llvm-project, rebuild llvm-test-suite)
 
 * Now we want to apply and build our changes to the llvm-project tree and use that to rebuild the llvm-test-suite.
 * Before we start, the easiest way to proceed is to grab your diff from a review you've already posted to phabricator or from a link you've generated from a paste website like seashells.io.
@@ -153,7 +171,7 @@ cmake -B./llvm-test-suite-build-prime -DLLVM_INSTALL_ROOT=`pwd`/toolchain-prime/
 make -j16 -C./llvm-test-suite-build-prime VERBOSE=1
 ```
 
-# Step 6 (Lift the newly build llvm-test-suites off of the Docker instance for further analysis and device testing):
+# Step 6 (Lift the newly build llvm-test-suites off of the Docker instance for further analysis and device testing)
 
 * Now that we are done building the llvm-test-suite both with an without our changes (llvm-test-suite-build and llvm-test-suite-build-prime artifacts), we can now rsync the artifacts off of the Docker container to our shared directory that we passed into the container earlier:
 
@@ -163,7 +181,7 @@ rsync -av llvm-test-suite-build-prime  /mnt/share
 ```
 * Now the test suite builds are in the `share` directory on your host systems home directory (ie probably ``/home/username/share` or `/Users/username/share` or `c:/Users/username/share`.
 
-# Step 7 (You're done):
+# Step 7 (You're done)
 
 * These llvm-test-suite builds can now be used for device runs or just simple examination for code size or instruction count changes.
 * Check out [README-RPI4.md](README-RPI4.md) to see how to setup a Raspberry Pi 4 to actually run the llvm-test-suite builds you have lifted off of your Docker instance. 
