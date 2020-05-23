@@ -47,6 +47,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && export GIT_SSL_NO_VERIFY=1 \
     && cd \
+    && git config --global http.sslverify false \
     && git clone http://github.com/plotfi/llvm-pi.git \
     && git clone http://github.com/llvm/llvm-project \
     && git clone http://github.com/llvm/llvm-test-suite
