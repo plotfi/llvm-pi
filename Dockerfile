@@ -46,6 +46,8 @@ RUN apt-get update \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && export GIT_SSL_NO_VERIFY=1 \
+    && cargo install ripgrep \
+    && cargo install fd-find \
     && cd \
     && git clone https://github.com/plotfi/dotfiles.git \
     && ln -s ~/dotfiles/gitconfig ~/.gitconfig \
