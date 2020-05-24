@@ -9,7 +9,7 @@ The following step by step guide will show how to cross-build the llvm-test-suit
 
 This repo is synced with the docker repo at https://hub.docker.com/r/plotfi/llvm-pi.
 
-You can either use the docker repo, in which case you can skip to [Step 3](https://github.com/plotfi/llvm-pi#step-3-clone-and-build-llvm-project)
+You can either use the docker repo, in which case you can skip to [Step 3](https://github.com/plotfi/llvm-pi#step-3-clone-and-build-llvm-project).
 
 Alternatively you can do the docker setup manually from a stock ubuntu focal image, or you can still alternatively ignore all the docker stuff and just follow the guide on a normal Ubuntu system.
 
