@@ -56,8 +56,6 @@ RUN apt-get update \
     && ln -s ~/dotfiles/vim/init.vim ~/.vimrc \
     && mkdir ~/Tools \
     && ln -s ~/toolchain ~/Tools/clang+llvm \
-    && git clone http://github.com/plotfi/llvm-pi.git \
-    && git clone http://github.com/llvm/llvm-project \
-    && git clone http://github.com/llvm/llvm-test-suite
+    && git clone http://github.com/plotfi/llvm-pi.git
 ENV DEBIAN_FRONTEND=dialog
 
