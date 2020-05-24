@@ -14,7 +14,7 @@ RUN apt-get update \
     && export GCC_VERS=10 \
     && apt install -y --no-install-recommends \
                cmake ninja-build clang clang-format clangd clang-tidy lldb lld gcc g++ vim cargo htop tmux git curl \
-               python3-distutils expect net-tools di tig wget netcat rsync ca-certificates sudo less \
+               python3-distutils expect net-tools di tig wget netcat rsync ca-certificates sudo less npm nodejs \
                build-essential crossbuild-essential-arm64 libgcc-s1-arm64-cross \
                libstdc++-$GCC_VERS-dev-arm64-cross libstdc++6-arm64-cross \
                libgcc1-arm64-cross libgcc-$GCC_VERS-dev-arm64-cross \
@@ -61,6 +61,10 @@ RUN apt-get update \
     && cargo install --path ./LanguageClient-neovim/ \
     && git clone http://github.com/llvm/llvm-project \
     && bash -x ~/llvm-pi/configure-toolchain.sh \
-    && bash -x ~/llvm-pi/create-symlinks.sh
+    && bash -x ~/llvm-pi/create-symlinks.sh \
+    && curl  https://codeload.github.com/compiler-explorer/compiler-explorer/zip/6cd1fab18f909cdcddd9f0528ec6b457b389b155 -o compiler-explorer.zip \
+    && unzip compiler-explorer.zip \
+    && mv compiler-explorer-* compiler-explorer \
+    && cp ~/llvm-pi/c++.defaults.properties ~/explorer/etc/config/c++.defaults.properties
 ENV DEBIAN_FRONTEND=dialog
 
