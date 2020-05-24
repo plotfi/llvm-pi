@@ -56,6 +56,12 @@ RUN apt-get update \
     && ln -s ~/dotfiles/vim/init.vim ~/.vimrc \
     && mkdir ~/Tools \
     && ln -s ~/toolchain ~/Tools/clang+llvm \
-    && git clone http://github.com/plotfi/llvm-pi.git
+    && git clone http://github.com/plotfi/llvm-pi.git \
+    && git clone --depth 1 https://github.com/autozimu/LanguageClient-neovim.git \
+    && cargo install --path ./LanguageClient-neovim/ \
+    && mkdir ./LanguageClient-neovim/bin \
+    && cp ~/.cargo/bin/languageclient ./LanguageClient-neovim/bin/ \
+    && ln -s ~/LanguageClient-neovim ~/.vim/plugins/ \
+    && ln -s ~/llvm-project-build/compile_commands.json ./llvm-project/
 ENV DEBIAN_FRONTEND=dialog
 
