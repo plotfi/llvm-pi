@@ -16,8 +16,10 @@ Alternatively you can do the docker setup manually from a stock ubuntu focal ima
 To use the docker repo first install docker from https://www.docker.com/, and follow these steps:
 
 ```
-sudo docker pull plotfi/llvm-pi
-sudo docker run --privileged --interactive --tty --name llvm-pi \
+cd /path/to/home/directory
+mkdir share
+docker pull plotfi/llvm-pi
+docker run --privileged --interactive --tty --name llvm-pi \
                 --mount type=bind,source=`pwd`/share,target=/mnt/share  plotfi/llvm-pi:latest /bin/bash
 ```
 
@@ -41,7 +43,7 @@ docker pull ubuntu
 
 * Finally, create your Ubuntu 20.04 LTS Docker instance while mapping your newly created 'share' directory to  '/mnt/share'
 ```
-sudo docker run --privileged --interactive --tty --name llvm-pi \
+docker run --privileged --interactive --tty --name llvm-pi \
   --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
 ```
 
