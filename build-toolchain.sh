@@ -1,7 +1,5 @@
 #!/bin/bash
 cd
-git -C ./llvm-project fetch --all
-git -C ./llvm-project reset --hard origin/master
 cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_LLD=ON \
               -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
               -DCMAKE_ASM_COMPILER=clang \
