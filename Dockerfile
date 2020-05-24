@@ -60,7 +60,7 @@ RUN apt-get update \
     && git clone --depth 1 https://github.com/autozimu/LanguageClient-neovim.git \
     && cargo install --path ./LanguageClient-neovim/ \
     && git clone http://github.com/llvm/llvm-project \
-    && bash -x ~/llvm-pi/build-toolchain.sh \
+    && bash -x ~/llvm-pi/configure-toolchain.sh \
     && bash -x ~/llvm-pi/create-symlinks.sh
 ENV DEBIAN_FRONTEND=dialog
 
