@@ -47,6 +47,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && cargo install ripgrep \
     && cargo install fd-find \
+    && cargo install exa \
+    && cargo install bat \
     && cd \
     && git clone https://github.com/plotfi/dotfiles.git \
     && ln -s ~/dotfiles/gitconfig ~/.gitconfig \
@@ -65,6 +67,8 @@ RUN apt-get update \
     && curl  https://codeload.github.com/compiler-explorer/compiler-explorer/zip/6cd1fab18f909cdcddd9f0528ec6b457b389b155 -o compiler-explorer.zip \
     && unzip compiler-explorer.zip \
     && mv compiler-explorer-* compiler-explorer \
-    && cp ~/llvm-pi/c++.defaults.properties ~/compiler-explorer/etc/config/c++.defaults.properties
+    && cp ~/llvm-pi/c++.defaults.properties ~/compiler-explorer/etc/config/c++.defaults.properties \
+    && git clone https://github.com/tpoechtrager/cctools-port.git \
+    && git clone https://github.com/tpoechtrager/apple-libtapi.git
 ENV DEBIAN_FRONTEND=dialog
 
