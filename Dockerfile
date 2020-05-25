@@ -65,6 +65,6 @@ RUN apt-get update \
     && curl  https://codeload.github.com/compiler-explorer/compiler-explorer/zip/6cd1fab18f909cdcddd9f0528ec6b457b389b155 -o compiler-explorer.zip \
     && unzip compiler-explorer.zip \
     && mv compiler-explorer-* compiler-explorer \
-    && cp ~/llvm-pi/c++.defaults.properties ~/explorer/etc/config/c++.defaults.properties
+    && cp ~/llvm-pi/c++.defaults.properties ~/compiler-explorer/etc/config/c++.defaults.properties
 ENV DEBIAN_FRONTEND=dialog
 
