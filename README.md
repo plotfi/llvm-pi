@@ -5,6 +5,8 @@ Often when making changes to LLVM's AArch64 backend, inorder to get a LGTM to la
 
 The following step by step guide will show how to cross-build the llvm-test-suite for the Raspberry Pi 4. For step on how to setup the Raspberry Pi 4 itself for on-device runs of the llvm-test-suite, please seem [README-RPI4.md](README-RPI4.md).
 
+If you'd like to see more detailed steps that can be reproduced outside of the Docker environment on Ubuntu 20.04 see [README-OLD.md](README-OLD.md).
+
 ## Pre Step
 
 This repo is synced with the docker repo at https://hub.docker.com/r/plotfi/llvm-pi.
