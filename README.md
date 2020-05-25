@@ -142,7 +142,7 @@ make -j16 -C./llvm-test-suite-build-prime VERBOSE=1
 rsync -av llvm-test-suite-build  /mnt/share
 rsync -av llvm-test-suite-build-prime  /mnt/share
 ```
-* Now the test suite builds are in the `share` directory on your host systems home directory (ie probably ``/home/username/share` or `/Users/username/share` or `c:/Users/username/share`.
+* Now the test suite builds are in the `share` directory on your host system. You can analyze them or run them on a Raspberry Pi 4 or other AArch64 Linux device for perf deltas.
 
 # Step 6 (You're done)
 
