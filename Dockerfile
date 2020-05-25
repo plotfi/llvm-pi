@@ -16,7 +16,7 @@ RUN apt-get update \
     && apt install -y --no-install-recommends \
                cmake ninja-build clang clang-format clangd clang-tidy lldb lld gcc g++ vim cargo htop tmux git curl \
                python3-distutils expect net-tools di tig wget netcat rsync ca-certificates sudo less npm nodejs unzip \
-               build-essential crossbuild-essential-arm64 libgcc-s1-arm64-cross \
+               build-essential crossbuild-essential-arm64 libgcc-s1-arm64-cross openssh-server \
                libstdc++-$GCC_VERS-dev-arm64-cross libstdc++6-arm64-cross \
                libgcc1-arm64-cross libgcc-$GCC_VERS-dev-arm64-cross \
     && cd \
