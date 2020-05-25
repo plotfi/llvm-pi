@@ -13,95 +13,48 @@ You can either use the docker repo, in which case you can skip to [Step 3](https
 
 Alternatively you can do the docker setup manually from a stock ubuntu focal image, or you can still alternatively ignore all the docker stuff and just follow the guide on a normal Ubuntu system.
 
-To use the docker repo first install docker from https://www.docker.com/, and follow these steps:
+To use the docker repo first install docker from https://www.docker.com 
+
+
+## Step 1 (Install llvm-pi docker instance)
+
+Now that you've installed docker follow either of the two following set of steps:
+
+### Option 1 (build llvm-pi docker image locally yourself):
 
 ```
-cd /path/to/home/directory
+git clone https://github.com/plotfi/llvm-pi.git
+cd llvm-pi
+docker build -t plotfi/llvm-pi:latest .
+docker run --privileged --interactive --tty --name llvm-pi \
+                --mount type=bind,source=`pwd`/share,target=/mnt/share  plotfi/llvm-pi:latest /bin/bash
+```
+
+
+### Option 2 (Pull an llvm-pi docker image from Docker Hub):
+
+Alternatively you can also try an pre-build docker image from https://hub.docker.com/r/plotfi/llvm-pi and use the following steps instead:
+
+```
 mkdir share
 docker pull plotfi/llvm-pi
 docker run --privileged --interactive --tty --name llvm-pi \
                 --mount type=bind,source=`pwd`/share,target=/mnt/share  plotfi/llvm-pi:latest /bin/bash
 ```
 
-Now skip to step 3.
+Note that the share directory will be shared between the docker instance (at /mnt/share) and your host machine.
 
-## Step 1 (Create Docker Instance)
+## Step 2 (clone and build llvm-project)
 
-* First things first, install Docker: https://www.docker.com/
-* Next, create a directory to share between your host system and the docker image:
-
-```
-cd /path/to/home/directory
-mkdir share
-```
-
-* Pull the ubuntu docker repo:
-
-```
-docker pull ubuntu
-```
-
-* Finally, create your Ubuntu 20.04 LTS Docker instance while mapping your newly created 'share' directory to  '/mnt/share'
-```
-docker run --privileged --interactive --tty --name llvm-pi \
-  --mount type=bind,source=`pwd`/share,target=/mnt/share  ubuntu:focal /bin/bash
-```
-
-## Step 2 (Install Dev Packages and setup Linux AArch64 sysroot)
-
-* Before going any further, inside the newly created docker image, cd to root's home directory (we will be working out of /root inside of Docker). Update apt, install git, and clone the llvm-pi repo:
-
-```
-apt update
-apt install git -y
-cd
-git clone https://github.com/plotfi/llvm-pi.git
-```
-
-* Now that we are inside our Docker instance of Ubuntu 20.04, we can install all of the devlopment packages and libaries needed to construct our sysroot and our cross compiler. To do this run the following:
-
-```
-# Sets the GCC Version. Latest currently on Ubuntu 20.04 is 10:
-export GCC_VERS=10
-cd
-bash -x ./llvm-pi/ubuntu-docker-presetup.sh
-```
-
-* The above installs a number of Ubuntu packages including cmake, clang, ninja, and various Gnu arm64 cross-build libraries.
-* Once those packages are installed it will construct an AArch64 Linux sysroot at `/root/sysroots/aarch64-linux-gnu`
-* You will also have build directories for `llvm-project-build`, `llvm-test-suite-build`, and `toolchain`.
-
-## Step 3 (clone and build llvm-project)
-
-### Step 3a (clone llvm-test-suite)
+It is likely that the Dockerfile already has cloned llvm-project for you, but if there is no `llvm-project` directory in your root user's home directory `/root` then follow these steps to clone and configure llvm-project:
 
 ```
 cd
 git clone http://github.com/llvm/llvm-project
+~/llvm-pi/configure-toolchain.sh
 ```
 
-### Step 3b (Build llvm-project including clang, lld, and AArch64 libc++ runtimes)
-
-* Now that we have our minimal sysroot and have cloned our llvm repos we can build llvm-project. This is the same llvm-project you will be applying any of your patches to to determine any instruction count, instruction type, code size, size, and runtime deltas. We are building llvm, clang, lld, compiler-rt, compiler-rt runtimes for aarch64, libc++ runtimes for aarch64 and all the rest because we want to use LLVM's facilities as much as possible for testing and because we want as little dependence to our potentially haphazzardly constructed Gnu sysroot.
-
-* Now invoke cmake using the `llvm-pi/llvm-rpi4.cmake` cache file, don't forget to pass in the `RPI4_CMAKE_SYSROOT` for the AArch64 Linux sysroot that was constructed earlier:
-
-```
-cd
-git -C ./llvm-project fetch --all
-git -C ./llvm-project reset --hard origin/master
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_LLD=ON \
-              -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
-              -DCMAKE_ASM_COMPILER=clang \
-              -DCMAKE_INSTALL_PREFIX=/ \
-              -DRPI4_CMAKE_SYSROOT=`pwd`/sysroots/aarch64-linux-gnu \
-              -C./llvm-pi/llvm-rpi4.cmake \
-              -S./llvm-project/llvm \
-              -B./llvm-project-build
-```
-
-* Note that our install root has been set to /root/toolchain.
-* Now build llvm-project with ninja and install it to /root/toolchain:
+Here `configure-toolchain.sh` runs the cmake invocation to configure llvm. Now run the following to build and install the llvm toolchain:
 
 ```
 cd
@@ -111,15 +64,15 @@ DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 
 We now have an llvm toolchain capable of building the llvm-test-suite for the AArch64 Linux.
 
-## Step 4 (clone and build llvm-test-suite) 
+## Step 3 (clone and build llvm-test-suite) 
 
-### Step 4a (clone llvm-test-suite)
+### Step 3a (clone llvm-test-suite)
 
 ```
 cd
 git clone http://github.com/llvm/llvm-test-suite
 ```
-### Step 4b (Build the llvm-test-suite for AArch64 Linux)
+### Step 3b (Build the llvm-test-suite for AArch64 Linux)
 
 
 * We've already cloned the llvm-test-suite, so now we build the llvm-test-suite using the `llvm-pi/llvm-test-suite-rpi4.cmake` cache file, the newly installed llvm toolchain, and provide the path to the Linux AArch64 sysroot:
@@ -142,7 +95,7 @@ cmake -B./llvm-test-suite-build -DLLVM_INSTALL_ROOT=`pwd`/toolchain/ \
 cd
 make -j16 -C./llvm-test-suite-build VERBOSE=1
 ```
-# Step 5 (Apply your new Clang/llvm/llvm-project/compiler-rt changes, rebuild llvm-project, rebuild llvm-test-suite)
+# Step 4 (Apply your new Clang/llvm/llvm-project/compiler-rt changes, rebuild llvm-project, rebuild llvm-test-suite)
 
 * Now we want to apply and build our changes to the llvm-project tree and use that to rebuild the llvm-test-suite.
 * Before we start, the easiest way to proceed is to grab your diff from a review you've already posted to phabricator or from a link you've generated from a paste website like seashells.io.
@@ -181,7 +134,7 @@ cmake -B./llvm-test-suite-build-prime -DLLVM_INSTALL_ROOT=`pwd`/toolchain-prime/
 make -j16 -C./llvm-test-suite-build-prime VERBOSE=1
 ```
 
-# Step 6 (Lift the newly build llvm-test-suites off of the Docker instance for further analysis and device testing)
+# Step 5 (Lift the newly build llvm-test-suites off of the Docker instance for further analysis and device testing)
 
 * Now that we are done building the llvm-test-suite both with an without our changes (llvm-test-suite-build and llvm-test-suite-build-prime artifacts), we can now rsync the artifacts off of the Docker container to our shared directory that we passed into the container earlier:
 
@@ -191,7 +144,7 @@ rsync -av llvm-test-suite-build-prime  /mnt/share
 ```
 * Now the test suite builds are in the `share` directory on your host systems home directory (ie probably ``/home/username/share` or `/Users/username/share` or `c:/Users/username/share`.
 
-# Step 7 (You're done)
+# Step 6 (You're done)
 
 * These llvm-test-suite builds can now be used for device runs or just simple examination for code size or instruction count changes.
 * Check out [README-RPI4.md](README-RPI4.md) to see how to setup a Raspberry Pi 4 to actually run the llvm-test-suite builds you have lifted off of your Docker instance. 
