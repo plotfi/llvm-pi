@@ -14,7 +14,10 @@ This repo is synced with the docker repo at https://hub.docker.com/r/plotfi/llvm
 
 You can either use the docker repo, in which case you can skip to [Step 3](https://github.com/plotfi/llvm-pi#step-3-clone-and-build-llvm-project).
 
-Alternatively you can do the docker setup manually from a stock ubuntu focal image, or you can still alternatively ignore all the docker stuff and just follow the guide on a normal Ubuntu system. That means: skip to step 2 and stop after step 5.
+Alternatively you can do the docker setup manually from a stock ubuntu focal image, or you can still alternatively ignore all the docker stuff and just follow the guide on a normal Ubuntu system.
+
+
+To use this guide for setting up on a native non-docker Ubuntu 20.04, skip to step 2 and stop after step 5.
 
 To use the docker repo first install docker from https://www.docker.com/, and follow these steps:
 
