@@ -50,6 +50,7 @@ RUN apt-get update \
     && cargo install fd-find \
     && cargo install exa \
     && cargo install bat \
+    && cargo install sccache \
     && cd \
     && git clone https://github.com/plotfi/dotfiles.git \
     && ln -s ~/dotfiles/gitconfig ~/.gitconfig \
