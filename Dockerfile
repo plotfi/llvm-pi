@@ -71,6 +71,7 @@ RUN apt-get update \
     && mv compiler-explorer-* compiler-explorer \
     && cp ~/llvm-pi/c++.defaults.properties ~/compiler-explorer/etc/config/c++.defaults.properties \
     && git clone https://github.com/tpoechtrager/cctools-port.git \
-    && git clone https://github.com/tpoechtrager/apple-libtapi.git
+    && git clone https://github.com/tpoechtrager/apple-libtapi.git \
+    && chmod 755 ~/llvm-pi/*.sh
 ENV DEBIAN_FRONTEND=dialog
 
