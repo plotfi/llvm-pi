@@ -40,7 +40,7 @@ Note that the share directory will be shared between the docker instance (at /mn
 
 ## Step 2 (clone and build llvm-project)
 
-Update the llvm-project checkout and build the toolchain:
+Update the llvm-project checkout and build the toolchain (the Dockerfile setup has already cloned and configured it for you):
 
 ```
 cd
