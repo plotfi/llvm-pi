@@ -1,18 +1,16 @@
 # Quick Steps
 
 * Before proceeding install Docker from https://www.docker.com 
-* NOTE: Make sure to configure your Docker to give the instances more than the default 2GB of memory. The build process will use more. Change it to 6-8GB at the least. 
+* NOTE: Make sure to configure your Docker to give the instances more than the default 2GB of memory.
+  * The build process will use more.
+  * Change it to 6-8GB at the least. 
 
-## Step 1 (Install llvm-pi docker instance)
-
-Now that you've installed Docker pull the image from Docker Hub and run an instance of the image:
+## Step 1 (pull and run a llvm-pi docker instance)
 
 ```
 docker pull plotfi/llvm-pi
 docker run --privileged --interactive --tty --name llvm-pi plotfi/llvm-pi:latest /bin/bash
 ```
-
-Note that the share directory will be shared between the docker instance (at /mnt/share) and your host machine.
 
 ## Step 2 (build and install llvm-project toolchain)
 
