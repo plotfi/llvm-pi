@@ -5,19 +5,11 @@
 
 ## Step 1 (Install llvm-pi docker instance)
 
-Now that you've installed Docker pull the image from Docker Hub:
+Now that you've installed Docker pull the image from Docker Hub and run an instance of the image:
 
 ```
 docker pull plotfi/llvm-pi
-```
-
-Now that you have your Docker image, run an instance of the image:
-
-```
-mkdir share
-docker run --privileged --interactive --tty --name llvm-pi \
-  --mount type=bind,source=`pwd`/share,target=/mnt/share \
-  plotfi/llvm-pi:latest /bin/bash
+docker run --privileged --interactive --tty --name llvm-pi plotfi/llvm-pi:latest /bin/bash
 ```
 
 Note that the share directory will be shared between the docker instance (at /mnt/share) and your host machine.
