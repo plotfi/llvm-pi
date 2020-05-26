@@ -28,8 +28,6 @@ Update the llvm-project checkout and build the toolchain (the Dockerfile setup h
 
 ```
 cd
-git -C ./llvm-project fetch --all
-git -C ./llvm-project reset --hard origin/master 
 DESTDIR=`pwd`/toolchain  ninja -C./llvm-project-build install
 ```
 
