@@ -31,7 +31,8 @@ Now that you have your Docker image, run an instance of the image:
 
 ```
 mkdir share
-docker run --privileged --interactive --tty --name llvm-pi --mount type=bind,source=share,target=/mnt/share  plotfi/llvm-pi:latest /bin/bash
+docker run --privileged --interactive --tty --name llvm-pi --mount type=bind,source=share,target=/mnt/share \
+  plotfi/llvm-pi:latest /bin/bash
 ```
 
 Note that the share directory will be shared between the docker instance (at /mnt/share) and your host machine.
