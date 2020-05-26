@@ -1,7 +1,7 @@
 # Quick Steps
 
 * Before proceeding install Docker from https://www.docker.com 
-* NOTE: Make sure to configure your Docker to give the instances more than the default 2GB of memory.
+* **NOTE:** Make sure to configure your Docker to give the instances more than the default 2GB of memory.
   * The build process will use more.
   * **Change it to 6-8GB at the least.**
 
