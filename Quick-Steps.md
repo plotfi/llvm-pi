@@ -17,7 +17,7 @@ Note that the share directory will be shared between the docker instance (at /mn
 ## Step 2 (build and install llvm-project toolchain)
 
 ```
-DESTDIR=$HOME/toolchain  ninja -C$HOME/llvm-project-build install
+DESTDIR=$HOME/toolchain ninja -C$HOME/llvm-project-build install
 ```
 
 ## Step 3 (clone, configure and build llvm-test-suite) 
