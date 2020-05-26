@@ -14,17 +14,13 @@ docker run --privileged --interactive --tty --name llvm-pi plotfi/llvm-pi:latest
 
 Note that the share directory will be shared between the docker instance (at /mnt/share) and your host machine.
 
-## Step 2 (clone and build llvm-project)
-
-Update the llvm-project checkout and build the toolchain (the Dockerfile setup has already cloned and configured it for you):
+## Step 2 (build and install llvm-project toolchain)
 
 ```
 DESTDIR=$HOME/toolchain  ninja -C$HOME/llvm-project-build install
 ```
 
-We now have an llvm toolchain capable of building the llvm-test-suite for the AArch64 Linux.
-
-## Step 3 (clone and build llvm-test-suite) 
+## Step 3 (clone, configure and build llvm-test-suite) 
 
 Clone the latest llvm-test-suite, configure it, and build it using the newly built toolchain:
 
