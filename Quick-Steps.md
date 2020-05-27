@@ -7,6 +7,10 @@
 
 ## Step 1 (pull and run a llvm-pi docker instance)
 
+The Docker image is hosted at https://hub.docker.com/r/plotfi/llvm-pi
+
+Pull and run it:
+
 ```
 docker pull plotfi/llvm-pi
 docker run --privileged --interactive --tty --name llvm-pi plotfi/llvm-pi:latest /bin/bash
