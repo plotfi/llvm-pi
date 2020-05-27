@@ -32,7 +32,7 @@ cmake -B$HOME/llvm-test-suite-build -DLLVM_INSTALL_ROOT=$HOME/toolchain/ \
       -DCMAKE_SYSROOT=$HOME/sysroots/aarch64-linux-gnu \
       -DCMAKE_C_FLAGS="-save-temps <additional_flags_for_your_changes>" \
       -C$HOME/llvm-pi/llvm-test-suite-rpi4.cmake \
-      -C$HOME/llvm-test-suite/cmake/caches/O3.cmake \
+      -C$HOME/llvm-test-suite/cmake/caches/Oz.cmake \
       $HOME/llvm-test-suite
 make -j8 -C$HOME/llvm-test-suite-build VERBOSE=1
 ```
