@@ -32,7 +32,7 @@ Now that you have your Docker image, run an instance of the image:
 ```
 mkdir share
 docker run --privileged --interactive --tty --name llvm-pi \
-  --mount type=bind,source=share,target=/mnt/share \
+  --mount type=bind,source=`pwd`/share,target=/mnt/share \
   plotfi/llvm-pi:latest /bin/bash
 ```
 
