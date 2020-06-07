@@ -6,7 +6,7 @@
 # To fully customize the contents of this image, use the following Dockerfile instead:
 # https://github.com/microsoft/vscode-dev-containers/tree/v0.117.1/containers/ubuntu-18.04-git/.devcontainer/Dockerfile
 # FROM ubuntu:focal
-FROM swiftlang/swift:nightly-focal
+FROM swiftlang/swift:focal
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
