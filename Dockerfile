@@ -15,6 +15,7 @@ RUN apt-get update \
     && export GCC_VERS=10 \
     && apt install -y --no-install-recommends \
                binutils gnupg2 libc6-dev libcurl4 libedit2 \
+               iputils-ping traceroute \
                libgcc-9-dev libpython2.7 libsqlite3-0 libstdc++-9-dev libxml2 libz3-dev pkg-config tzdata zlib1g-dev \
                cmake ninja-build clang clang-format clangd clang-tidy lldb lld cgdb gcc g++ vim cargo htop tmux git curl \
                python3-distutils expect net-tools di tig wget netcat rsync ca-certificates sudo less npm nodejs unzip \
