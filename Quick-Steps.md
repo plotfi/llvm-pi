@@ -28,11 +28,12 @@ Clone the latest llvm-test-suite, configure it, and build it using the newly bui
 
 ```
 git clone http://github.com/llvm/llvm-test-suite $HOME/llvm-test-suite
+export LLVM_TEST_SUITE_C_FLAGS="-save-temps"
 cmake -B$HOME/llvm-test-suite-build -DLLVM_INSTALL_ROOT=$HOME/toolchain/ \
       -DCMAKE_SYSROOT=$HOME/sysroots/aarch64-linux-gnu \
-      -DCMAKE_C_FLAGS="-save-temps <additional_flags_for_your_changes>" \
+      -DCMAKE_C_FLAGS=$LLVM_TEST_SUITE_C_FLAGS \
       -C$HOME/llvm-pi/llvm-test-suite-rpi4.cmake \
-      -C$HOME/llvm-test-suite/cmake/caches/O3.cmake \
+      -C$HOME/llvm-test-suite/cmake/caches/Oz.cmake \
       $HOME/llvm-test-suite
 make -j8 -C$HOME/llvm-test-suite-build VERBOSE=1
 ```
