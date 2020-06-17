@@ -31,7 +31,7 @@ git clone http://github.com/llvm/llvm-test-suite $HOME/llvm-test-suite
 export LLVM_TEST_SUITE_C_FLAGS="-save-temps"
 cmake -B$HOME/llvm-test-suite-build -DLLVM_INSTALL_ROOT=$HOME/toolchain/ \
       -DCMAKE_SYSROOT=$HOME/sysroots/aarch64-linux-gnu \
-      -DCMAKE_C_FLAGS=$LLVM_TEST_SUITE_C_FLAGS \
+      -DCMAKE_C_FLAGS="$LLVM_TEST_SUITE_C_FLAGS" \
       -C$HOME/llvm-pi/llvm-test-suite-rpi4.cmake \
       -C$HOME/llvm-test-suite/cmake/caches/Oz.cmake \
       $HOME/llvm-test-suite
