@@ -71,6 +71,7 @@ RUN apt-get update \
     && bash -x ~/llvm-pi/create-symlinks.sh \
     && curl  https://codeload.github.com/compiler-explorer/compiler-explorer/zip/6cd1fab18f909cdcddd9f0528ec6b457b389b155 -o compiler-explorer.zip \
     && unzip compiler-explorer.zip \
+    && rm compiler-explorer.zip \
     && mv compiler-explorer-* compiler-explorer \
     && cp ~/llvm-pi/c++.defaults.properties ~/compiler-explorer/etc/config/c++.defaults.properties \
     && git clone https://github.com/tpoechtrager/cctools-port.git \
