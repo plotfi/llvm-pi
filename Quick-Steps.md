@@ -38,4 +38,6 @@ cmake -B$HOME/llvm-test-suite-build -DLLVM_INSTALL_ROOT=$HOME/toolchain/ \
 make -j8 -C$HOME/llvm-test-suite-build VERBOSE=1
 ```
 
-The build artifacts for the llvm-test-suite should be at $HOME/llvm-test-suite-build
+The build artifacts for the llvm-test-suite should be at $HOME/llvm-test-suite-build.
+
+## Step 4 (Delta build)
