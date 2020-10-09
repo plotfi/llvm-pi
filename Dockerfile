@@ -44,6 +44,7 @@ RUN apt-get update \
     && rsync -av usr ../ \
     && cd .. \
     && rm -rf tmp \
+    && ln -s /usr/bin/lld-link-10 /usr/bin/lld-link \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -64,9 +65,12 @@ RUN apt-get update \
     && mkdir ~/Tools \
     && ln -s ~/toolchain ~/Tools/clang+llvm \
     && git clone http://github.com/plotfi/llvm-pi.git \
+    && git clone http://github.com/plotfi/llvm-win.git \
+    && git clone http://github.com/plotfi/LLVM-Runtimes-Builds.git \
     && git clone --depth 1 https://github.com/autozimu/LanguageClient-neovim.git \
     && cargo install --path ./LanguageClient-neovim/ \
     && git clone http://github.com/llvm/llvm-project \
+    && git clone http://github.com/apple/swift \
     && bash -x ~/llvm-pi/configure-toolchain.sh \
     && bash -x ~/llvm-pi/create-symlinks.sh \
     && curl  https://codeload.github.com/compiler-explorer/compiler-explorer/zip/6cd1fab18f909cdcddd9f0528ec6b457b389b155 -o compiler-explorer.zip \
