@@ -1,0 +1,21 @@
+diff --git a/llvm-rpi4.cmake b/llvm-rpi4.cmake
+index 49ddafc..fb035d8 100644
+--- a/llvm-rpi4.cmake
++++ b/llvm-rpi4.cmake
+@@ -60,10 +60,16 @@ set(LLVM_TOOLCHAIN_TOOLS
+ # Runtimes and Builtins for RPI4 cross compiling:
+ set(LLVM_BUILTIN_TARGETS
+   aarch64-unknown-linux-gnu
++  x86_64-unknown-windows-msvc
+ CACHE STRING "")
+ set(LLVM_RUNTIME_TARGETS
+   aarch64-unknown-linux-gnu
++  x86_64-unknown-windows-msvc
+ CACHE STRING "")
++
++set(LLVM_WIN_REPO "/root/llvm-win")
++include("/root/llvm-win/llvm-runtimes-windows.cmake")
++
+ set(target aarch64-unknown-linux-gnu)
+ # Builtins:
+ set(BUILTINS_${target}_CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "")
