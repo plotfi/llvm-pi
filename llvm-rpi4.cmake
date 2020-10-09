@@ -58,8 +58,12 @@ set(LLVM_TOOLCHAIN_TOOLS
     CACHE STRING "")
 
 # Runtimes and Builtins for RPI4 cross compiling:
-set(LLVM_BUILTIN_TARGETS aarch64-unknown-linux-gnu CACHE STRING "")
-set(LLVM_RUNTIME_TARGETS aarch64-unknown-linux-gnu CACHE STRING "")
+set(LLVM_BUILTIN_TARGETS
+  aarch64-unknown-linux-gnu
+CACHE STRING "")
+set(LLVM_RUNTIME_TARGETS
+  aarch64-unknown-linux-gnu
+CACHE STRING "")
 set(target aarch64-unknown-linux-gnu)
 # Builtins:
 set(BUILTINS_${target}_CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "")
